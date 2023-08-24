@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Data Transposition</title>
+<style>
+  body {
+    background-color: #1a1a1a;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  textarea, button {
+    background-color: #333;
+    color: white;
+    border: 1px solid #666;
+    padding: 5px;
+  }
+  button:hover {
+    background-color: #555;
+  }
+</style>
+</head>
+<body>
+
+<h2>Data Transposition</h2>
+
+<label for="inputData">Enter Data in Rows:</label><br>
+<textarea id="inputData" rows="5" cols="40"></textarea><br><br>
+
+<button onclick="transposeData()">Transpose</button><br><br>
+
+<label for="outputData">Transposed Data:</label><br>
+<textarea id="outputData" rows="5" cols="40" readonly></textarea>
+
+<script>
+function transposeData() {
+    var inputData = document.getElementById("inputData").value;
+    var rows = inputData.split("\n");
+    var transposedData = [];
+
+    // Split rows into columns
+    for (var i = 0; i < rows.length; i++) {
+        var columns = rows[i].trim().split(/\s+/);
+        for (var j = 0; j < columns.length; j++) {
+            if (!transposedData[j]) {
+                transposedData[j] = [];
+            }
+            transposedData[j][i] = columns[j];
+        }
+    }
+
+    // Construct transposed output
+    var output = "";
+    for (var i = 0; i < transposedData.length; i++) {
+        output += transposedData[i].join("	") + "\n";
+    }
+
+    document.getElementById("outputData").value = output;
+}
+</script>
+
+</body>
+</html>
